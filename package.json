@@ -14,10 +14,12 @@
   "author": "issteam32",
   "license": "",
   "dependencies": {
+    "axios": "^0.21.1",
     "fastify": "^3.14.2",
     "fastify-cli": "^2.9.1",
     "fastify-cors": "^5.2.0",
     "fastify-env": "^2.1.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "pino-pretty": "^4.7.1"
   }
 }

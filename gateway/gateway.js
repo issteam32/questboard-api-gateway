@@ -1,10 +1,13 @@
 const fs = require('fs');
+const axios = require('axios').default;
+const config = require('./config');
 let apiServiceRoutes;
 
 const init = function() {
     console.log("init run");
     apiServiceRoutes = JSON.parse(fs.readFileSync(__dirname + '/../api.json', 'utf8'));
     console.log("init done");
+    console.log(apiServiceRoutes);
 }
 
 const validateReqParam = function(req, serviceMapAction, type) {
@@ -26,7 +29,7 @@ const validateReqParam = function(req, serviceMapAction, type) {
         let paramValid;    
         const requiredParams = serviceMapAction.param
             .filter(p => {
-                console.log("inside filter: ", p);
+                // console.log("inside filter: ", p);
                 return p.paramType === paramType;
             })
             .filter(p => p.required)
@@ -51,8 +54,32 @@ const validateReqParam = function(req, serviceMapAction, type) {
     return false;
 }
 
+const identifyServiceUrl = function(serviceTarget) {
+    switch (serviceTarget.toLowerCase()) {
+        case "user-service":
+            return config.userServiceUrl;
+        break;
+        case "chat-service":
+            return config.chatServiceUrl;
+        break;
+        case "quest-service":
+            return config.questServiceUrl;
+        break;
+        case "review-service":
+            return config.reviewServiceUrl;
+        break;
+        case "reward-service":
+            return config.rewardServiceUrl;
+        break;
+        default:
+            return "";
+        break;
+    }
+    
+}
+
 const constructServiceRequest = function(req, serviceMapAction) {
-    let url = serviceMapAction.path;
+    let url = identifyServiceUrl(serviceMapAction.serviceTarget) + serviceMapAction.path;
     let reqBody = {};
     let authorize = true;
     
@@ -83,7 +110,7 @@ const constructServiceRequest = function(req, serviceMapAction) {
     }
 
     if (!serviceMapAction.public) {
-        if (!req.getHeader("authorization")) {
+        if (!(req.headers["authorization"] || req.headers["Authorization"])) {
             authorize = false;
         }
     }
@@ -102,6 +129,7 @@ const prepareRequest = async function(req, action) {
         if (apiServiceRoutes === undefined) init();
 
         const serviceMapAction = apiServiceRoutes[action];
+
         if (serviceMapAction) {
             let paramValid = false;
             for (const t of serviceMapAction.paramType) {                                
@@ -113,29 +141,69 @@ const prepareRequest = async function(req, action) {
             }
 
             if (!paramValid) {
-                console.error("param validation failed");
-                reject("param validation failed");
+                req.log.error("param validation failed");
+                reject({
+                    status: 400,
+                    message: "param validation failed"
+                });
             }
 
             const requestObject = constructServiceRequest(req, serviceMapAction);
             if (requestObject.authorize) {
+                req.log.debug(requestObject);
                 resolve(requestObject);
             } else {
-                console.error("request need authorization");
-                reject("request need authorization");
+                req.log.error("request need authorization");
+                reject({
+                    status: 401,
+                    message: "request need authorization"
+                });
             }
 
         } else {
-            console.error("no service mapping found");
-            reject("no service mapping found");
+            req.log.error("no service mapping found");
+            reject({
+                status: 404,
+                message: "no service mapping found"
+            });
         }
     });
+}
+
+const call = async function(requestObject) {
+    try {
+        let request = {};
+        if (requestObject.method === "POST") {
+            request['method'] = 'post';
+            request['url'] = requestObject.url;
+            request['headers'] = requestObject.headers;
+            request['data'] = requestObject.body;            
+        } else if (requestObject.method === "GET") {
+            request['method'] = 'get';
+            request['url'] = requestObject.url;
+            request['headers'] = requestObject.headers;            
+        } else if (requestObject.method === "PUT") {
+            request['method'] = 'put';
+            request['url'] = requestObject.url;
+            request['headers'] = requestObject.headers;
+            request['data'] = requestObject.body;
+        } else if (requestObject.method === "DELETE") {
+            request['method'] = 'delete';
+            request['url'] = requestObject.url;
+            request['headers'] = requestObject.headers;            
+        }
+        const response = await axios(request);
+        return response.data;
+    } catch (err) {
+        throw {status: err.response.status, message: err.message};
+    }
 }
 
 init();
 
 module.exports = {
     init: init,
-    apiServiceRoutes: apiServiceRoutes,
-    prepareRequest: prepareRequest
+    apiServiceRoutes,
+    prepareRequest,
+    call,
 }

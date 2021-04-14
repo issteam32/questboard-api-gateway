@@ -30,6 +30,7 @@
         "paramType": ["body"],
         "path": "/api/u/v1/user/register",
         "accept": "application/json",
+        "serviceTarget": "user-service",
         "public": true,
         "queryParam": [],
         "pathParam": []
@@ -53,10 +54,11 @@
         "paramType": ["body"],
         "path": "/api/u/v1/user/login",
         "accept": "application/json",
+        "serviceTarget": "user-service",
         "public": true,
         "queryParam": [],
         "pathParam": []
-    },
+    },    
     "createSkillSetProfile": {
         "param": [
             {
@@ -76,6 +78,7 @@
         "paramType": ["body"],
         "path": "/api/ssp/v1/user-skillset-profile",
         "accept": "application/json",
+        "serviceTarget": "user-service",
         "public": false,
         "queryParam": [],
         "pathParam": []
@@ -105,6 +108,7 @@
         "paramType": ["body", "param"],
         "path": "/api/ssp/v1/user-skillset-profile",
         "accept": "application/json",
+        "serviceTarget": "user-service",
         "public": false,
         "queryParam": [],
         "pathParam": ["id"]
