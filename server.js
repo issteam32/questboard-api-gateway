@@ -1,8 +1,6 @@
 require('dotenv').config();
 
-const fastify = require('fastify')({
-    logger: true
-});
+const fastify = require('fastify')({logger: true});
 
 fastify.register(require('./gateway/route'));
 

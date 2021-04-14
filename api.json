@@ -1,0 +1,112 @@
+{
+    "registerNewUser": {
+        "param": [
+            {
+                "name": "username",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "email",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "password",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "passwordConfirm",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            }
+        ],
+        "method": "POST",
+        "paramType": ["body"],
+        "path": "/api/u/v1/user/register",
+        "accept": "application/json",
+        "public": true,
+        "queryParam": [],
+        "pathParam": []
+    },
+    "loginUser": {
+        "param": [
+            {
+                "name": "username",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "password",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            }
+        ],
+        "method": "POST",
+        "paramType": ["body"],
+        "path": "/api/u/v1/user/login",
+        "accept": "application/json",
+        "public": true,
+        "queryParam": [],
+        "pathParam": []
+    },
+    "createSkillSetProfile": {
+        "param": [
+            {
+                "name": "skill",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "skillDesc",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            }
+        ],
+        "method": "POST",
+        "paramType": ["body"],
+        "path": "/api/ssp/v1/user-skillset-profile",
+        "accept": "application/json",
+        "public": false,
+        "queryParam": [],
+        "pathParam": []
+    },
+    "updateSkillSetProfile": {
+        "param": [
+            {
+                "name": "id",
+                "type": "string",
+                "paramType": "param",
+                "required": true
+            },
+            {
+                "name": "skill",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "skillDesc",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            }
+        ],
+        "method": "POST",
+        "paramType": ["body", "param"],
+        "path": "/api/ssp/v1/user-skillset-profile",
+        "accept": "application/json",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    }
+}
