@@ -92,25 +92,79 @@
                 "required": true
             },
             {
-                "name": "skill",
-                "type": "string",
+                "name": "display",
+                "type": "boolean",
                 "paramType": "body",
-                "required": true
+                "required": false
             },
             {
                 "name": "skillDesc",
                 "type": "string",
                 "paramType": "body",
-                "required": true
+                "required": false
+            },
+            {
+                "name": "skillEndorsed",
+                "type": "string",
+                "paramType": "body",
+                "required": false
             }
         ],
-        "method": "POST",
+        "method": "PUT",
         "paramType": ["body", "param"],
-        "path": "/api/ssp/v1/user-skillset-profile",
+        "path": "/api/ssp/v1/skillset-profile",
         "accept": "application/json",
         "serviceTarget": "user-service",
         "public": false,
         "queryParam": [],
         "pathParam": ["id"]
+    },
+    "getUserSkillSetProfile": {
+        "param": [
+            {
+                "name": "userId",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "GET",
+        "paramType": ["param"],
+        "path": "/api/ssp/v1/user-skillset-profile",
+        "accept": "application/json",
+        "serviceTarget": "user-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["userId"]
+    },
+    "deleteSkillSetProfile": {
+        "param": [
+            {
+                "name": "id",
+                "type": "string",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "DELETE",
+        "paramType": ["param"],
+        "path": "/api/ssp/v1/skillset-profile",
+        "accept": "application/json",
+        "serviceTarget": "user-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "getListOfSkills": {
+        "param": [],
+        "method": "GET",
+        "paramType": [],
+        "path": "/api/ssp/v1/list-of-skill",
+        "accept": "application/json",
+        "serviceTarget": "user-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": []
     }
+
 }

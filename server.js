@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const fastify = require('fastify')({logger:{ prettyPrint: true}});
 
-fastify.register(require('./gateway/route'));
+fastify.register(require('./gateway/route'), { prefix: '/api' });
 
 fastify.register(require('fastify-cors'))
 

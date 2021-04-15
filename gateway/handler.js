@@ -44,14 +44,58 @@ const createSkillsetProfile = async function(request, reply) {
     }
 }
 
+const updateUserSkillsetProfile = async function(request, reply) {
+    try {
+        const serviceRequest = await gateway.prepareRequest(request, "updateSkillSetProfile");        
+        
+        const resp = await gateway.call(serviceRequest);
+        request.log.info(serviceRequest);
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
 
 const getUserSkillsetProfile = async function(request, reply) {
     try {
+        const serviceRequest = await gateway.prepareRequest(request, "getUserSkillSetProfile");        
         
+        const resp = await gateway.call(serviceRequest);
+        
+        return resp;
     } catch (err) {
         request.log.error(err);
-        reply.code(400);
-        return false;
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const deleteSkillsetProfile = async function(request, reply) {
+    try {
+        const serviceRequest = await gateway.prepareRequest(request, "deleteSkillSetProfile");        
+        
+        const resp = await gateway.call(serviceRequest);
+        
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
+
+const getListOfSkills = async function(request, reply) {
+    try {
+        const serviceRequest = await gateway.prepareRequest(request, "getListOfSkills");        
+        
+        const resp = await gateway.call(serviceRequest);        
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
     }
 }
 
@@ -61,4 +105,7 @@ module.exports = {
     userLogin,
     createSkillsetProfile,
     getUserSkillsetProfile,
+    updateUserSkillsetProfile,
+    deleteSkillsetProfile,
+    getListOfSkills
 }
