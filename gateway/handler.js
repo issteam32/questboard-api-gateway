@@ -63,11 +63,30 @@ const getUserSkillsetProfile = async function(request, reply) {
         const serviceRequest = await gateway.prepareRequest(request, "getUserSkillSetProfile");        
         
         const resp = await gateway.call(serviceRequest);
-        
+        request.log.info(serviceRequest);
         return resp;
     } catch (err) {
         request.log.error(err);
         throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const getUserProfile = async function(request, reply) {
+    try {
+        const skillProfileRequest = await gateway.prepareRequest(request, "getUserSkillSetProfile"); 
+        const everydayProfileRequest = await gateway.prepareRequest(request, "getUserEverydayProfile");
+        const myProfileRequest = await gateway.prepareRequest(request, "myProfile");
+
+        const resp = await gateway.parallelCall({
+            myProfile: myProfileRequest,
+            skillProfile: skillProfileRequest,
+            everydayProfile: everydayProfileRequest
+        });
+                    
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw err;
     }
 }
 
@@ -76,21 +95,20 @@ const deleteSkillsetProfile = async function(request, reply) {
         const serviceRequest = await gateway.prepareRequest(request, "deleteSkillSetProfile");        
         
         const resp = await gateway.call(serviceRequest);
-        
+        request.log.info(serviceRequest);
         return resp;
     } catch (err) {
         request.log.error(err);
         throw {statusCode: err.status, message: err.message};
     }
 }
-
-
 
 const getListOfSkills = async function(request, reply) {
     try {
         const serviceRequest = await gateway.prepareRequest(request, "getListOfSkills");        
         
-        const resp = await gateway.call(serviceRequest);        
+        const resp = await gateway.call(serviceRequest);
+        // const resp = await gateway.parallelCall([serviceRequest,serviceRequest]);
 
         return resp;
     } catch (err) {
@@ -98,6 +116,62 @@ const getListOfSkills = async function(request, reply) {
         throw {statusCode: err.status, message: err.message};
     }
 }
+
+const createEverydayProfile = async function(request, reply) {
+    try {
+        const createEverydayProfileRequest = await gateway.prepareRequest(request, "createEveryDayProfile");
+
+        const resp = await gateway.call(createEverydayProfileRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const updateEverydayProfile = async function(request, reply) {
+    try {
+        const createEverydayProfileRequest = await gateway.prepareRequest(request, "updateEveryDayProfile");
+
+        const resp = await gateway.call(createEverydayProfileRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
+const getProfessionalProfile = async function(request, reply) {
+    try {
+        const createEverydayProfileRequest = await gateway.prepareRequest(request, "getProfessionalLevel");
+
+        const resp = await gateway.call(createEverydayProfileRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
+
+const updateProfessionalProfile = async function(request, reply) {
+    try {
+        const createEverydayProfileRequest = await gateway.prepareRequest(request, "updateProfessionalLevel");
+
+        const resp = await gateway.call(createEverydayProfileRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
 
 module.exports = {
     hello,
@@ -107,5 +181,10 @@ module.exports = {
     getUserSkillsetProfile,
     updateUserSkillsetProfile,
     deleteSkillsetProfile,
-    getListOfSkills
+    getListOfSkills,
+    createEverydayProfile,
+    getUserProfile,
+    updateEverydayProfile,
+    getProfessionalProfile,
+    updateProfessionalProfile,
 }

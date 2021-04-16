@@ -58,7 +58,59 @@
         "public": true,
         "queryParam": [],
         "pathParam": []
-    },    
+    },
+    "createEveryDayProfile": {
+        "param": [],
+        "method": "POST",
+        "paramType": [],
+        "path": "/api/nlv/v1/novicelvl",
+        "accept": "application/json",
+        "serviceTarget": "user-service",
+        "public": true,
+        "queryParam": [],
+        "pathParam": []
+    },
+    "updateEveryDayProfile": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            },
+            {
+                "name": "title",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "exp",
+                "type": "number",
+                "paramType": "body",
+                "required": false
+            }
+        ],
+        "method": "PUT",
+        "paramType": ["body", "param"],
+        "path": "/api/nlv/v1/novicelvl",
+        "accept": "application/json",
+        "serviceTarget": "user-service",
+        "public": true,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "myProfile": {
+        "param": [],
+        "method": "GET",
+        "paramType": [],
+        "path": "/api/u/v1/user",
+        "accept": "application/json",
+        "serviceTarget": "user-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": []
+    },
     "createSkillSetProfile": {
         "param": [
             {
@@ -137,6 +189,24 @@
         "queryParam": [],
         "pathParam": ["userId"]
     },
+    "getUserEverydayProfile": {
+        "param": [
+            {
+                "name": "userId",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "GET",
+        "paramType": ["param"],
+        "path": "/api/nlv/v1/user-novicelvl",
+        "accept": "application/json",
+        "serviceTarget": "user-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["userId"]
+    },
     "deleteSkillSetProfile": {
         "param": [
             {
@@ -165,6 +235,53 @@
         "public": false,
         "queryParam": [],
         "pathParam": []
+    },
+    "getProfessionalLevel": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "GET",
+        "paramType": ["param"],
+        "path": "/api/plv/v1/proflvl",
+        "accept": "application/json",
+        "serviceTarget": "user-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "updateProfessionalLevel": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            },
+            {
+                "name": "title",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "exp",
+                "type": "number",
+                "paramType": "body",
+                "required": false
+            }
+        ],
+        "method": "PUT",
+        "paramType": ["param", "body"],
+        "path": "/api/plv/v1/proflvl",
+        "accept": "application/json",
+        "serviceTarget": "user-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
     }
-
 }

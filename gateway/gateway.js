@@ -1,8 +1,10 @@
 const fs = require('fs');
+const logger = require('pino')();
 const utils = require('./utils');
 const fetch = require('node-fetch');
 const config = require('./config');
 var async = require("async");
+
 let apiServiceRoutes;
 
 const init = function() {
@@ -17,7 +19,7 @@ const validateReqParam = function(req, serviceMapAction, type) {
     let paramType = type;
 
     if (reqParam && paramType) {
-        let paramValid;    
+        let paramValid = true;
         const requiredParams = serviceMapAction.param
             .filter(p => {
                 return p.paramType === paramType;
@@ -102,10 +104,10 @@ const constructServiceRequest = function(req, serviceMapAction) {
             let queryParameters = serviceMapAction.queryParam;
             let appendUrl = "?";
             for (const q of queryParameters) {
-                if (!(p in req.body)) {
+                if (!(q.name in req.body)) {
                     throw {status: 400, message: "parameters not found in request body"}
                 }
-                appendUrl += q + "=" + req.body[q];
+                appendUrl += q + "=" + req.body[q.name];
             }
             url += appendUrl;
         }
@@ -114,11 +116,15 @@ const constructServiceRequest = function(req, serviceMapAction) {
                 .filter(p => p.paramType === "body")
                 .map(p => p);
             for (const p of bodyParameters) { 
-                if (!(p in req.body)) {
+                if (!(p.name in req.body)) {
                     throw {status: 400, message: "parameters not found in request body"}
                 }           
                 reqBody[p.name] = req.body[p.name]
             }
+        }
+    } else {
+        if (serviceMapAction.method.toUpperCase() === "POST") {
+            reqBody['emptyToken'] = utils.emptyToken(12);
         }
     }
     // console.log('after params check');
@@ -126,10 +132,10 @@ const constructServiceRequest = function(req, serviceMapAction) {
     // console.log('request header: ', req.headers["authorization"]);
     if (!serviceMapAction.public) {
         if (!(req.headers["authorization"] == null || req.headers["Authorization"] == null)) {
-            console.log('authorization check: false');
+            logger.info('authorization check: false');
             authorize = false;
         }
-        console.log('authorization check: true');
+        logger.info('authorization check: true');
     }
 
     return {
@@ -162,15 +168,15 @@ const prepareRequest = async function(req, action) {
             }
 
             if (!paramValid) {
-                req.log.error("param validation failed");
+                req.log.error(`${action} - param validation failed`);
                 reject({
                     status: 400,
-                    message: "param validation failed"
+                    message: `${action} - param validation failed`
                 });
             }
 
             const requestObject = constructServiceRequest(req, serviceMapAction);
-            // console.log('requestObject: ', requestObject);
+
             if (requestObject.authorize) {
                 req.log.debug(requestObject);
                 resolve(requestObject);
@@ -194,6 +200,10 @@ const prepareRequest = async function(req, action) {
 
 const call = async function(request) {
     try {
+        if (request.method == null) {
+            throw {status: 500, message: "incorrect http calling method"};
+        }
+
         let resp;
         let options = {
             method: request.method,
@@ -210,7 +220,9 @@ const call = async function(request) {
             delete options.headers['Content-Type'];
             delete options.headers['content-length'];
             delete options.headers['Content-Length'];
-        }
+        }        
+
+        logger.info("call http request: ", request);
 
         resp = await fetch(request.url, options);
 
@@ -231,17 +243,41 @@ const call = async function(request) {
 
 const parallelCall = async function(requests) {
     return new Promise((resolve, reject) => {
-        async.parallel({
-            skill1: async () => {
-               return await call(requests[0])
-            },
-            skill2: async () => {
-                return await call(requests[1])
-            }
-        }, (err, result) => {    
-            if (err) reject(err);
+        let httpCalls = {};
+        for (const [key, func] of Object.entries(requests)) {
+            httpCalls[key] = async () => {
+                    console.log(`making call for ${key}`)
+                    return await call(func) 
+                }
+        }
+        if (utils.isEmpty(httpCalls)) {
+            reject({status: 500, message: "no valid http calls"});
+        }
 
-            resolve(result);
+        logger.info("calling parallel http requests: ", httpCalls);
+
+        async.parallel(httpCalls, (err, result) => {            
+            if (err && result === null) reject(err);
+            
+            const resultKeys = Object.keys(result);
+            const requestKeys = Object.keys(requests);
+            if (resultKeys.length === requestKeys.length) {
+                resolve(result);
+            } else {
+                let anyError = false;
+                for (const [key, func] of Object.entries(requests)) {
+                    if ((result[key] == null) || resultKeys.indexOf(key) <= -1) {
+                        result[key] = err;
+                        anyError = true;
+                    }
+                }
+
+                if (anyError) reject(result);
+
+                resolve(result);
+            }
+
+
         });
     })
 }
