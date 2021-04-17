@@ -20,6 +20,10 @@ module.exports = async function (fastify, opts, done) {
     fastify.post('/get-user-quest', handler.getUserQuest);
     fastify.post('/get-category-quest', handler.getQuestByCategory);
     fastify.post('/delete-quest', handler.deleteQuest);
+    fastify.post('/create-quest-user-concern', handler.createQuestUserConcern);
+    fastify.post('/delete-quest-user-concern', handler.deleteQuestUserConcern);
+    fastify.post('/chat-room-and-messages', handler.getChatRoomMessages);
+    fastify.post('/chat-message', handler.getChatMessageById);
 
     done();
 }

@@ -253,6 +253,56 @@ const getQuestByCategory = async function(request, reply) {
 }
 
 
+const deleteQuestUserConcern = async function(request, reply) {
+    try {
+        const deleteQuestUserConcernRequest = await gateway.prepareRequest(request, "deleteQuestUserConcern");
+
+        const resp = await gateway.call(deleteQuestUserConcernRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const createQuestUserConcern = async function(request, reply) {
+    try {
+        const createQuestUserConcernRequest = await gateway.prepareRequest(request, "createQuestUserConcern");
+        const resp = await gateway.call(createQuestUserConcernRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const getChatRoomMessages = async function(request, reply) {
+    try {
+        const getQuestChatMessagesRequest = await gateway.prepareRequest(request, "getQuestChatMessages");
+        const resp = await gateway.call(getQuestChatMessagesRequest);
+        console.log(getQuestChatMessagesRequest);
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const getChatMessageById = async function(request, reply) {
+    try {
+        const getChatMessageByIdRequest = await gateway.prepareRequest(request, "getChatMessageById");
+        const resp = await gateway.call(getChatMessageById);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
 module.exports = {
     hello,
     registerUser,
@@ -272,5 +322,9 @@ module.exports = {
     updateQuest,
     deleteQuest,
     getUserQuest,
-    getQuestByCategory
+    getQuestByCategory,
+    createQuestUserConcern,
+    deleteQuestUserConcern,
+    getChatRoomMessages,
+    getChatMessageById
 }

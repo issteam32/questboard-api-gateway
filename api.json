@@ -503,11 +503,131 @@
                 "required": true
             }            
         ],
-        "method": "GET",
+        "method": "DELETE",
         "paramType": ["param"],
         "path": "/api/q/v1/user-quest",
         "accept": "application/json",
         "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "awardQuest": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            },
+            {
+                "name": "awardTo",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            }
+        ],
+        "method": "POST",
+        "paramType": ["param", "body"],
+        "path": "/api/q/v1/quest/award",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "createQuestUserConcern": {
+        "param": [
+            {
+                "name": "context",
+                "type": "string",
+                "paramType": "param",
+                "required": true
+            },
+            {
+                "name": "concernValidation",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "questId",
+                "type": "number",
+                "paramType": "body",
+                "required": true
+            }
+        ],
+        "method": "POST",
+        "paramType": ["body"],
+        "path": "/api/q/v1/quest/user-concern",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": []
+    },
+    "deleteQuestUserConcern": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "DELETE",
+        "paramType": ["param"],
+        "path": "/api/q/v1/quest/user-concern",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "getQuestChatMessages": {
+        "param": [
+            {
+                "name": "senderId",
+                "type": "string",
+                "paramType": "param",
+                "required": true
+            },
+            {
+                "name": "recipientId",
+                "type": "string",
+                "paramType": "param",
+                "required": true
+            },
+            {
+                "name": "questId",
+                "type": "string",
+                "paramType": "param",
+                "required": true
+            }
+        ],
+        "method": "GET",
+        "paramType": ["param"],
+        "path": "/messages",
+        "accept": "application/json",
+        "serviceTarget": "chat-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["senderId", "recipientId", "questId"]
+    },
+    "getChatMessageById": {
+        "param": [
+            {
+                "name": "id",
+                "type": "string",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "GET",
+        "paramType": ["param"],
+        "path": "/messages",
+        "accept": "application/json",
+        "serviceTarget": "chat-service",
         "public": false,
         "queryParam": [],
         "pathParam": ["id"]
