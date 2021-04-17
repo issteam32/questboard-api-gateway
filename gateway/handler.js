@@ -173,6 +173,86 @@ const updateProfessionalProfile = async function(request, reply) {
 }
 
 
+const createQuest = async function(request, reply) {
+    try {
+        const createQuestRequest = await gateway.prepareRequest(request, "createQuest");
+
+        const resp = await gateway.call(createQuestRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const updateQuest = async function(request, reply) {
+    try {
+        const updateQuestRequest = await gateway.prepareRequest(request, "updateQuest");
+
+        const resp = await gateway.call(updateQuestRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const deleteQuest = async function(request, reply) {
+    try {
+        const deleteQuestRequest = await gateway.prepareRequest(request, "deleteQuest");
+
+        const resp = await gateway.call(deleteQuestRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const getUserQuest = async function(request, reply) {
+    try {
+        const getUserQuestRequest = await gateway.prepareRequest(request, "getUserQuest");
+
+        const resp = await gateway.call(getUserQuestRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
+const getQuest = async function(request, reply) {
+    try {
+        const getSingleQuestRequest = await gateway.prepareRequest(request, "getSingleQuest");
+
+        const resp = await gateway.call(getSingleQuestRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const getQuestByCategory = async function(request, reply) {
+    try {
+        const getQuestByCategoryRequest = await gateway.prepareRequest(request, "getQuestByCategory");
+
+        const resp = await gateway.call(getQuestByCategoryRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
 module.exports = {
     hello,
     registerUser,
@@ -187,4 +267,10 @@ module.exports = {
     updateEverydayProfile,
     getProfessionalProfile,
     updateProfessionalProfile,
+    getQuest,
+    createQuest,
+    updateQuest,
+    deleteQuest,
+    getUserQuest,
+    getQuestByCategory
 }

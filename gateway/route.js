@@ -14,5 +14,12 @@ module.exports = async function (fastify, opts, done) {
     fastify.post('/update-everyday-profile', handler.updateEverydayProfile);
     fastify.post('/get-professional-profile', handler.updateEverydayProfile);
     fastify.post('/update-professional-profile', handler.updateEverydayProfile);
+    fastify.post('/create-quest', handler.createQuest);
+    fastify.post('/update-quest', handler.updateQuest);
+    fastify.post('/get-single-quest', handler.getQuest);
+    fastify.post('/get-user-quest', handler.getUserQuest);
+    fastify.post('/get-category-quest', handler.getQuestByCategory);
+    fastify.post('/delete-quest', handler.deleteQuest);
+
     done();
 }

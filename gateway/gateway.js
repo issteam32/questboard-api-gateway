@@ -11,7 +11,7 @@ const init = function() {
     console.log("init run");
     apiServiceRoutes = JSON.parse(fs.readFileSync(__dirname + '/../api.json', 'utf8'));
     console.log("init done");
-    console.log(apiServiceRoutes);
+    // console.log(apiServiceRoutes);
 }
 
 const validateReqParam = function(req, serviceMapAction, type) {
@@ -103,11 +103,17 @@ const constructServiceRequest = function(req, serviceMapAction) {
         if (serviceMapAction.paramType.indexOf("query") > -1) {
             let queryParameters = serviceMapAction.queryParam;
             let appendUrl = "?";
+            let queryCounter = 0;
             for (const q of queryParameters) {
-                if (!(q.name in req.body)) {
+                if (!(q in req.body)) {
                     throw {status: 400, message: "parameters not found in request body"}
                 }
-                appendUrl += q + "=" + req.body[q.name];
+                if (queryCounter > 0) {
+                    appendUrl += "&" + q + "=" + req.body[q];
+                } else {
+                    appendUrl += q + "=" + req.body[q];
+                }
+                queryCounter++;
             }
             url += appendUrl;
         }
@@ -116,7 +122,7 @@ const constructServiceRequest = function(req, serviceMapAction) {
                 .filter(p => p.paramType === "body")
                 .map(p => p);
             for (const p of bodyParameters) { 
-                if (!(p.name in req.body)) {
+                if (!(p.name in req.body) && p.required) {
                     throw {status: 400, message: "parameters not found in request body"}
                 }           
                 reqBody[p.name] = req.body[p.name]

@@ -283,5 +283,233 @@
         "public": false,
         "queryParam": [],
         "pathParam": ["id"]
+    },
+    "getSingleQuest": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "GET",
+        "paramType": ["param"],
+        "path": "/api/q/v1/quest",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "getQuestByCategory": {
+        "param": [
+            {
+                "name": "page",
+                "type": "number",
+                "paramType": "query",
+                "required": true
+            },
+            {
+                "name": "limit",
+                "type": "number",
+                "paramType": "query",
+                "required": true
+            },
+            {
+                "name": "category",
+                "type": "string",
+                "paramType": "query",
+                "required": true
+            }
+        ],
+        "method": "GET",
+        "paramType": ["query"],
+        "path": "/api/q/v1/quest/category",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": ["page", "limit", "category"],
+        "pathParam": []
+    },
+    "getUserQuest": {
+        "param": [
+            {
+                "name": "type",
+                "type": "string",
+                "paramType": "query",
+                "required": true
+            }            
+        ],
+        "method": "GET",
+        "paramType": ["query"],
+        "path": "/api/q/v1/user-quest",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": ["type"],
+        "pathParam": []
+    },
+    "createQuest": {
+        "param": [
+            {
+                "name": "title",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "requestor",
+                "type": "number",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "location",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "description",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "category",
+                "type": "number",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "skillRequired",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },            
+            {
+                "name": "rewardType",
+                "type": "number",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "reward",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            }
+        ],
+        "method": "POST",
+        "paramType": ["body"],
+        "path": "/api/q/v1/quest",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": []
+    },
+    "updateQuest": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": false
+            },
+            {
+                "name": "title",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "requestor",
+                "type": "number",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "location",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "description",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "category",
+                "type": "number",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "skillRequired",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "status",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "reward_type",
+                "type": "number",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "reward",
+                "type": "string",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "awardedTo",
+                "type": "number",
+                "paramType": "body",
+                "required": false
+            },
+            {
+                "name": "awarded",
+                "type": "boolean",
+                "paramType": "body",
+                "required": false
+            }
+        ],
+        "method": "POST",
+        "paramType": ["body", "param"],
+        "path": "/api/q/v1/quest",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "deleteRequestorQuest": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "GET",
+        "paramType": ["param"],
+        "path": "/api/q/v1/user-quest",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
     }
 }
