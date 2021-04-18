@@ -1,11 +1,11 @@
 require('dotenv').config();
 
-const fastify = require('fastify')({logger:{ prettyPrint: true}});
+const fastify = require('fastify')({logger:{ prettyPrint: false}});
 fastify.register(require('fastify-cors'));
 fastify.register(require('fastify-print-routes'));
+fastify.register(require('fastify-compress'));
 
 fastify.register(require('./gateway/route'), { prefix: '/api' });
-
 
 const start = async () => {
     try {
