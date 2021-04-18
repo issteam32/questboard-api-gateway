@@ -1,0 +1,18 @@
+os: linux
+language: node_js
+node_js: '12'
+services:
+  - docker
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+cache: npm
+before_install:  
+  - docker pull node:12.20.1-alpine
+  - chmod +x ./travis-build.sh
+  - chmod +x ./travis-deploy.sh
+script:
+  - ./travis-build.sh
+after_success:
+  - ./travis-deploy.sh
