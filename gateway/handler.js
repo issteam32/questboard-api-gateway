@@ -349,7 +349,10 @@ const getQuestProposal = async function(request, reply) {
 
 const deleteQuestProposal = async function(request, reply) {
     try {
+        const deleteQuestProposalRequest = await gateway.prepareRequest(request, "deleteQuestProposal");
+        const resp = await gateway.call(deleteQuestProposalRequest);
 
+        return resp;
     } catch (err) {
         request.log.error(err);
         throw {statusCode: err.status, message: err.message};
@@ -360,6 +363,71 @@ const evaluateQuestProposal = async function(request, reply) {
     try {
         const evaluateQuestProposalRequest = await gateway.prepareRequest(request, "evaluateQuestProposal");
         const resp = await gateway.call(evaluateQuestProposalRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const deleteQuestRequestTaker = async function(request, reply) {
+    try {
+        const deleteQuestRequestTakerRequest = await gateway.prepareRequest(request, "deleteQuestRequestTaker");
+        const resp = await gateway.call(deleteQuestRequestTakerRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
+const getQuestRequestTaker = async function(request, reply) {
+    try {
+        const getQuestRequestTakerRequest = await gateway.prepareRequest(request, "getQuestRequestTaker");
+        const resp = await gateway.call(getQuestRequestTakerRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
+const getQuestRequestTakerByQuest = async function(request, reply) {
+    try {
+        const getQuestRequestTakerByQuestRequest = await gateway.prepareRequest(request, "getQuestRequestTakerByQuest");
+        const resp = await gateway.call(getQuestRequestTakerByQuestRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
+
+const createQuestTakerRequest = async function(request, reply) {
+    try {
+        const createQuestTakerRequestRequest = await gateway.prepareRequest(request, "createQuestTakerRequest");
+        const resp = await gateway.call(createQuestTakerRequestRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
+const updateQuestTakerRequest = async function(request, reply) {
+    try {
+        const updateQuestTakerRequestRequest = await gateway.prepareRequest(request, "updateQuestTakerRequest");
+        const resp = await gateway.call(updateQuestTakerRequestRequest);
 
         return resp;
     } catch (err) {
@@ -395,4 +463,10 @@ module.exports = {
     getQuestProposal,
     createQuestProposal,
     evaluateQuestProposal,
+    deleteQuestProposal,
+    deleteQuestRequestTaker,
+    getQuestRequestTaker,
+    getQuestRequestTakerByQuest,
+    createQuestTakerRequest,
+    updateQuestTakerRequest
 }

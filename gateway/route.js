@@ -27,6 +27,12 @@ module.exports = async function (fastify, opts, done) {
     fastify.post('/create-quest-proposal', handler.createQuestProposal);
     fastify.post('/get-proposal', handler.getQuestProposal);
     fastify.post('/evaluate-proposal', handler.evaluateQuestProposal);
+    fastify.post('/delete-quest-proposal', handler.deleteQuestProposal);
+    fastify.post('/get-taker-request', handler.getQuestRequestTaker);
+    fastify.post('/get-quest-taker-request', handler.getQuestRequestTakerByQuest);
+    fastify.post('/create-taker-request', handler.createQuestTakerRequest);
+    fastify.post('/update-taker-request', handler.updateQuestTakerRequest);
+    fastify.post('/delete-taker-request', handler.deleteQuestRequestTaker);
 
     done();
 }

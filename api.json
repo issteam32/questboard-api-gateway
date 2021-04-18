@@ -139,7 +139,7 @@
         "param": [
             {
                 "name": "id",
-                "type": "string",
+                "type": "number",
                 "paramType": "param",
                 "required": true
             },
@@ -211,7 +211,7 @@
         "param": [
             {
                 "name": "id",
-                "type": "string",
+                "type": "number",
                 "paramType": "param",
                 "required": true
             }            
@@ -636,7 +636,7 @@
         "param": [
             {
                 "name": "id",
-                "type": "string",
+                "type": "number",
                 "paramType": "param",
                 "required": true
             }            
@@ -654,7 +654,7 @@
         "param": [
             {
                 "name": "questId",
-                "type": "string",
+                "type": "number",
                 "paramType": "param",
                 "required": true
             }            
@@ -667,5 +667,119 @@
         "public": false,
         "queryParam": [],
         "pathParam": ["questId"]
+    },
+    "deleteQuestProposal": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "DELETE",
+        "paramType": ["param"],
+        "path": "/api/q/v1/quest/user-concern",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "deleteQuestRequestTaker": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "DELETE",
+        "paramType": ["param"],
+        "path": "/api/q/v1/quest/quest-taker",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "getQuestRequestTaker": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "GET",
+        "paramType": ["param"],
+        "path": "/api/q/v1/quest/quest-taker-id",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "getQuestRequestTakerByQuest": {
+        "param": [
+            {
+                "name": "questId",
+                "type": "number",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "GET",
+        "paramType": ["param"],
+        "path": "/api/q/v1/quest/quest-taker-quest",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["questId"]
+    },
+    "createQuestTakerRequest": {
+        "param": [
+            {
+                "name": "questId",
+                "type": "number",
+                "paramType": "body",
+                "required": true
+            }            
+        ],
+        "method": "POST",
+        "paramType": ["body"],
+        "path": "/api/q/v1/quest/quest-taker",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": []
+    },
+    "updateQuestTakerRequest": {
+        "param": [
+            {
+                "name": "id",
+                "type": "number",
+                "paramType": "body",
+                "required": true
+            },
+            {
+                "name": "status",
+                "type": "string",
+                "paramType": "body",
+                "required": true
+            }
+        ],
+        "method": "PUT",
+        "paramType": ["body"],
+        "path": "/api/q/v1/quest/quest-taker",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": []
     }
 }
