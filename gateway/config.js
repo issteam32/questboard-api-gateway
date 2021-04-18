@@ -7,4 +7,5 @@ module.exports = {
     reviewServiceUrl: `${process.env.API_SERVER}/review-service`,
     chatServiceUrl: `${process.env.API_SERVER}/chat`,
     rewardServiceUrl: `${process.env.API_SERVER}/reward-service`,
+    questServiceUrlLocal: 'http://192.168.49.2:30005'
 }

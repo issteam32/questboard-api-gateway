@@ -24,6 +24,9 @@ module.exports = async function (fastify, opts, done) {
     fastify.post('/delete-quest-user-concern', handler.deleteQuestUserConcern);
     fastify.post('/chat-room-and-messages', handler.getChatRoomMessages);
     fastify.post('/chat-message', handler.getChatMessageById);
+    fastify.post('/create-quest-proposal', handler.createQuestProposal);
+    fastify.post('/get-proposal', handler.getQuestProposal);
+    fastify.post('/evaluate-proposal', handler.evaluateQuestProposal);
 
     done();
 }

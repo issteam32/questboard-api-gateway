@@ -541,7 +541,7 @@
             {
                 "name": "context",
                 "type": "string",
-                "paramType": "param",
+                "paramType": "body",
                 "required": true
             },
             {
@@ -631,5 +631,41 @@
         "public": false,
         "queryParam": [],
         "pathParam": ["id"]
+    },
+    "getQuestProposal": {
+        "param": [
+            {
+                "name": "id",
+                "type": "string",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "GET",
+        "paramType": ["param"],
+        "path": "/api/q/v1/quest/proposal",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["id"]
+    },
+    "evaluateQuestProposal": {
+        "param": [
+            {
+                "name": "questId",
+                "type": "string",
+                "paramType": "param",
+                "required": true
+            }            
+        ],
+        "method": "POST",
+        "paramType": ["param"],
+        "path": "/api/q/v1/quest/proposal-evaluate",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": ["questId"]
     }
 }

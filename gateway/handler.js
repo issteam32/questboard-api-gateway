@@ -1,3 +1,4 @@
+const { questServiceUrl } = require('./config');
 const gateway = require('./gateway');
 
 const hello = async function(req, rep) {
@@ -302,6 +303,70 @@ const getChatMessageById = async function(request, reply) {
     }
 }
 
+const createQuestProposal = async function(request, reply) {
+    try {
+        const questServiceUrl2 = "http://192.168.49.2:30005";
+        const apiUrl = questServiceUrl2 + "/api/q/v1/quest/proposal";
+        const body = request.body;
+        const headers = request.headers;
+        const createQuestProposalRequest =  {
+            headers: headers,
+            url: apiUrl,
+            body: body,
+            method: "POST"            
+        };
+
+        const resp = await gateway.call(createQuestProposalRequest);
+        
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const updateQuestProposal = async function(request, reply) {
+    try {
+
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const getQuestProposal = async function(request, reply) {
+    try {
+        const getQuestProposalRequest = await gateway.prepareRequest(request, "getQuestProposal");
+        const resp = await gateway.call(getQuestProposalRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
+const deleteQuestProposal = async function(request, reply) {
+    try {
+
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+const evaluateQuestProposal = async function(request, reply) {
+    try {
+        const evaluateQuestProposalRequest = await gateway.prepareRequest(request, "evaluateQuestProposal");
+        const resp = await gateway.call(evaluateQuestProposalRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
 
 module.exports = {
     hello,
@@ -326,5 +391,8 @@ module.exports = {
     createQuestUserConcern,
     deleteQuestUserConcern,
     getChatRoomMessages,
-    getChatMessageById
+    getChatMessageById,
+    getQuestProposal,
+    createQuestProposal,
+    evaluateQuestProposal,
 }
