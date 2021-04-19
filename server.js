@@ -9,7 +9,10 @@ fastify.register(require('./gateway/route'), { prefix: '/api' });
 
 const start = async () => {
     try {
-        await fastify.listen(process.env.SERVER_PORT, process.env.SERVER_HOST);
+        const port = process.env.PORT || 8080;
+        const host = process.env.SERVER_HOST || '0.0.0.0';
+        console.log(`server is running at ${host}:${port}`)
+        await fastify.listen(port, host);
     } catch (err) {
         fastify.log.error(err);
         process.exit(1);
