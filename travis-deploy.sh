@@ -15,7 +15,8 @@ gcloud auth activate-service-account --key-file service-account.json
 gcloud config set project $GCLOUD_PROJECT_ID
 
 gcloud config set compute/zone asia-southeast1-a
-# gcloud auth configure-docker
+
+gcloud auth configure-docker
 
 docker pull $DOCKER_REPO/api-gateway:$GIT_SHA
 
