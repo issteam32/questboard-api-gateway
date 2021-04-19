@@ -26,4 +26,4 @@ docker push gcr.io/$GCLOUD_PROJECT_ID/api-gateway:$GIT_SHA
 
 gcloud container images list-tags gcr.io/$GCLOUD_PROJECT_ID/api-gateway
 
-gcloud run deploy $SERVICE_NAME --image gcr.io/$GCLOUD_PROJECT_ID/api-gateway:$GIT_SHA --port 3000 --region asia-southeast1-a --platform managed
+gcloud run deploy $SERVICE_NAME --image gcr.io/$GCLOUD_PROJECT_ID/api-gateway:$GIT_SHA --platform managed
