@@ -10,7 +10,7 @@ docker push $DOCKER_REPO/api-gateway:$GIT_SHA
 #gcloud deploy cloud run
 docker pull $DOCKER_REPO/api-gateway:$GIT_SHA
 
-docker tag $DOCKER_REPO/api-gateway:$GIT_SHA gcr:io/$GCLOUD_PROJECT_ID/$DOCKER_REPO/api-gateway:$GIT_SHA
+docker tag $DOCKER_REPO/api-gateway:$GIT_SHA gcr.io/$GCLOUD_PROJECT_ID/api-gateway:$GIT_SHA
 
 docker push gcr.io/$GCLOUD_PROJECT_ID/api-gateway:$GIT_SHA
 
