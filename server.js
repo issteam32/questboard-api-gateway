@@ -11,7 +11,7 @@ const start = async () => {
     try {
         const port = process.env.PORT || 8080;
         const host = process.env.SERVER_HOST || '0.0.0.0';
-        console.log(`server is running at ${host}:${port}`)
+        console.log(`server is running at ${host}:${port}`);
         await fastify.listen(port, host);
     } catch (err) {
         fastify.log.error(err);
