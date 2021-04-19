@@ -9,10 +9,14 @@ echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 docker push $DOCKER_REPO/api-gateway:$GIT_SHA
 
 #gcloud deploy cloud run
+gcloud auth configure-docker
+
 docker pull $DOCKER_REPO/api-gateway:$GIT_SHA
 
 docker tag $DOCKER_REPO/api-gateway:$GIT_SHA gcr.io/$GCLOUD_PROJECT_ID/api-gateway:$GIT_SHA
 
 docker push gcr.io/$GCLOUD_PROJECT_ID/api-gateway:$GIT_SHA
+
+gcloud container images list-tags gcr.io/$GCLOUD_PROJECT_ID/api-gateway
 
 gcloud run deploy --image=gcr.io/$GCLOUD_PROJECT_ID/api-gateway:$GIT_SHA --port=3000 --region=asia-southeast1-a --platform=managed
