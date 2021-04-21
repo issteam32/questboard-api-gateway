@@ -436,6 +436,19 @@ const updateQuestTakerRequest = async function(request, reply) {
     }
 }
 
+const getChatRooms = async function(request, reply) {
+    try {
+        const getChatRoomsRequest = await gateway.prepareRequest(request, "getChatRooms");
+        const resp = await gateway.call(getChatRoomsRequest);
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
 module.exports = {
     hello,
     registerUser,
@@ -468,5 +481,6 @@ module.exports = {
     getQuestRequestTaker,
     getQuestRequestTakerByQuest,
     createQuestTakerRequest,
-    updateQuestTakerRequest
+    updateQuestTakerRequest,
+    getChatRooms
 }

@@ -33,6 +33,7 @@ module.exports = async function (fastify, opts, done) {
     fastify.post('/create-taker-request', handler.createQuestTakerRequest);
     fastify.post('/update-taker-request', handler.updateQuestTakerRequest);
     fastify.post('/delete-taker-request', handler.deleteQuestRequestTaker);
+    fastify.post('/chat-rooms', handler.getChatRooms);
 
     done();
 }

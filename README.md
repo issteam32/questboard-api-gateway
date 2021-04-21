@@ -61,4 +61,47 @@ The schema above is a sample for the gateway to produce the required microservic
 
 Add new schema to api.json, so that the gateway will load it when then app initialize. 
 
+Server is running at 0.0.0.0:8080, in local, try connect it with http://localhost:8080
+
+Current Available routes:
+
+╔═══════════╤═══════════════════════════════════╗
+║ Method(s) │ Path                              ║
+╟───────────┼───────────────────────────────────╢
+║       GET │ /api/                             ║
+║      POST │ /api/chat-message                 ║
+║      POST │ /api/chat-room-and-messages       ║
+║      POST │ /api/chat-rooms                   ║
+║      POST │ /api/create-everyday-profile      ║
+║      POST │ /api/create-quest                 ║
+║      POST │ /api/create-quest-proposal        ║
+║      POST │ /api/create-quest-user-concern    ║
+║      POST │ /api/create-taker-request         ║
+║      POST │ /api/create-user-skillset-profile ║
+║      POST │ /api/delete-quest                 ║
+║      POST │ /api/delete-quest-proposal        ║
+║      POST │ /api/delete-quest-user-concern    ║
+║      POST │ /api/delete-taker-request         ║
+║      POST │ /api/delete-user-skillset-profile ║
+║      POST │ /api/evaluate-proposal            ║
+║      POST │ /api/get-category-quest           ║
+║      POST │ /api/get-list-of-skills           ║
+║      POST │ /api/get-professional-profile     ║
+║      POST │ /api/get-proposal                 ║
+║      POST │ /api/get-quest-taker-request      ║
+║      POST │ /api/get-single-quest             ║
+║      POST │ /api/get-taker-request            ║
+║      POST │ /api/get-user-full-profile        ║
+║      POST │ /api/get-user-quest               ║
+║      POST │ /api/get-user-skillset-profile    ║
+║      POST │ /api/login                        ║
+║      POST │ /api/register                     ║
+║      POST │ /api/update-everyday-profile      ║
+║      POST │ /api/update-professional-profile  ║
+║      POST │ /api/update-quest                 ║
+║      POST │ /api/update-taker-request         ║
+║      POST │ /api/update-user-skillset-profile ║
+╚═══════════╧═══════════════════════════════════╝
+
 More documents will be added later.
+

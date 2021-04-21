@@ -781,5 +781,16 @@
         "public": false,
         "queryParam": [],
         "pathParam": []
+    },
+    "getChatRooms": {
+        "param": [],
+        "method": "GET",
+        "paramType": [],
+        "path": "/rooms",
+        "accept": "application/json",
+        "serviceTarget": "chat-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": []
     }
 }
