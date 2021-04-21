@@ -65,6 +65,7 @@ Server is running at 0.0.0.0:8080, in local, try connect it with http://localhos
 
 Current Available routes:
 
+```
 ╔═══════════╤═══════════════════════════════════╗
 ║ Method(s) │ Path                              ║
 ╟───────────┼───────────────────────────────────╢
@@ -102,6 +103,7 @@ Current Available routes:
 ║      POST │ /api/update-taker-request         ║
 ║      POST │ /api/update-user-skillset-profile ║
 ╚═══════════╧═══════════════════════════════════╝
+```
 
 More documents will be added later.
 
