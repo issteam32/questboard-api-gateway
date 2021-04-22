@@ -438,8 +438,24 @@ const updateQuestTakerRequest = async function(request, reply) {
 
 const getChatRooms = async function(request, reply) {
     try {
+        const getUserQuestRequest = await gateway.prepareRequest(request, "getUserQuest");
         const getChatRoomsRequest = await gateway.prepareRequest(request, "getChatRooms");
-        const resp = await gateway.call(getChatRoomsRequest);
+        const resp = await gateway.parallelCall({
+            quests: getUserQuestRequest,
+            chatRooms: getChatRoomsRequest
+        });
+
+        if (resp.quests != null && resp.chatRooms != null) {
+            resp.chatRooms.forEach((cr) => {
+                let quest = resp.quests.find(q => q.id === cr.questId);
+                console.log('quest: ', quest);
+                let title = '';
+                if (quest != null && quest != undefined) {
+                    title = quest.title
+                }
+                cr['questName'] = title;
+            });
+        }
 
         return resp;
     } catch (err) {
