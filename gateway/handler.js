@@ -279,6 +279,42 @@ const createQuestUserConcern = async function(request, reply) {
     }
 }
 
+const createQuestConcerns = async function(request, reply) {
+    try {
+        let parallelReqs = {};
+        const costConcern = request.body['cost'];
+        const timeConcern = request.body['time'];
+
+        if (costConcern !== "") {
+            console.log('cost: ', costConcern);
+            const fakeReq1 = {
+                body: costConcern,
+                headers: request.headers
+            };
+            const createQuestCostConcernRequest = await gateway.prepareRequest(fakeReq1, "createQuestUserConcern");
+            parallelReqs['cost'] = createQuestCostConcernRequest;
+        }
+
+        if (timeConcern !== "") {
+            console.log('time: ', timeConcern);
+            const fakeReq2 = {
+                body: timeConcern,
+                headers: request.headers
+            };
+            const createQuestTimeConcernRequest = await gateway.prepareRequest(fakeReq2, "createQuestUserConcern");
+            parallelReqs['time'] = createQuestTimeConcernRequest;
+        }
+        console.log('user concerns', parallelReqs);
+        const resp = await gateway.parallelCall(parallelReqs);
+
+        return resp;
+        return parallelReqs;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
 const getChatRoomMessages = async function(request, reply) {
     try {
         const getQuestChatMessagesRequest = await gateway.prepareRequest(request, "getQuestChatMessages");
@@ -498,5 +534,6 @@ module.exports = {
     getQuestRequestTakerByQuest,
     createQuestTakerRequest,
     updateQuestTakerRequest,
-    getChatRooms
+    getChatRooms,
+    createQuestConcerns
 }

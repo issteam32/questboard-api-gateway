@@ -29,6 +29,9 @@ const validateReqParam = function(req, serviceMapAction, type) {
         
         if (requiredParams) {
             for (const p of requiredParams) {
+                // console.log('#######################');
+                // console.log(p.name);
+                // console.log('#######################');
                 if (p.name in reqParam) {
                     paramValid = true;
                 } else {
@@ -174,7 +177,7 @@ const prepareRequest = async function(req, action) {
             }
 
             if (!paramValid) {
-                req.log.error(`${action} - param validation failed`);
+                logger.error(`${action} - param validation failed`);
                 reject({
                     status: 400,
                     message: `${action} - param validation failed`
@@ -184,10 +187,10 @@ const prepareRequest = async function(req, action) {
             const requestObject = constructServiceRequest(req, serviceMapAction);
 
             if (requestObject.authorize) {
-                req.log.debug(requestObject);
+                logger.debug(requestObject);
                 resolve(requestObject);
             } else {
-                req.log.error("request need authorization");
+                logger.error("request need authorization");
                 reject({
                     status: 401,
                     message: "request need authorization"
@@ -195,7 +198,7 @@ const prepareRequest = async function(req, action) {
             }
 
         } else {
-            req.log.error("no service mapping found");
+            logger.error("no service mapping found");
             reject({
                 status: 404,
                 message: "no service mapping found"
