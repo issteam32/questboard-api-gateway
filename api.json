@@ -172,40 +172,26 @@
         "pathParam": ["id"]
     },
     "getUserSkillSetProfile": {
-        "param": [
-            {
-                "name": "userId",
-                "type": "number",
-                "paramType": "param",
-                "required": true
-            }            
-        ],
+        "param": [],
         "method": "GET",
-        "paramType": ["param"],
+        "paramType": [],
         "path": "/api/ssp/v1/user-skillset-profile",
         "accept": "application/json",
         "serviceTarget": "user-service",
         "public": false,
         "queryParam": [],
-        "pathParam": ["userId"]
+        "pathParam": []
     },
     "getUserEverydayProfile": {
-        "param": [
-            {
-                "name": "userId",
-                "type": "number",
-                "paramType": "param",
-                "required": true
-            }            
-        ],
+        "param": [],
         "method": "GET",
-        "paramType": ["param"],
+        "paramType": [],
         "path": "/api/nlv/v1/user-novicelvl",
         "accept": "application/json",
         "serviceTarget": "user-service",
         "public": false,
         "queryParam": [],
-        "pathParam": ["userId"]
+        "pathParam": []
     },
     "deleteSkillSetProfile": {
         "param": [
