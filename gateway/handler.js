@@ -1,5 +1,6 @@
 const { questServiceUrl } = require('./config');
 const gateway = require('./gateway');
+const config = require('./config');
 
 const hello = async function(req, rep) {
     return 'hello, world';
@@ -341,8 +342,8 @@ const getChatMessageById = async function(request, reply) {
 
 const createQuestProposal = async function(request, reply) {
     try {
-        const questServiceUrl2 = "http://192.168.49.2:30005";
-        const apiUrl = questServiceUrl2 + "/api/q/v1/quest/proposal";
+        // const questServiceUrl2 = "http://192.168.49.2:30005";
+        const apiUrl = config.questServiceUrl + "/api/q/v1/quest/proposal";
         const body = request.body;
         const headers = request.headers;
         const createQuestProposalRequest =  {
