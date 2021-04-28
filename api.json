@@ -778,5 +778,16 @@
         "public": false,
         "queryParam": [],
         "pathParam": []
+    },
+    "getUserProposedQuests": {
+        "param": [],
+        "method": "GET",
+        "paramType": [],
+        "path": "/api/q/v1/user-proposed-quests",
+        "accept": "application/json",
+        "serviceTarget": "quest-service",
+        "public": false,
+        "queryParam": [],
+        "pathParam": []
     }
 }

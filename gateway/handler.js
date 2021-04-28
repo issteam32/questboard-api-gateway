@@ -501,6 +501,46 @@ const getChatRooms = async function(request, reply) {
     }
 }
 
+const getUserProposedQuest = async function(request, reply) {
+    try {
+        const getUserProposedQuestsReq = await gateway.prepareRequest(request, "getUserProposedQuests");
+        
+        const resp = await gateway.call(getUserProposedQuestsReq);        
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
+
+
+const getAllQuests = async function(request, reply) {
+    try {
+        const getUserProposedQuestsReq = await gateway.prepareRequest(request, "getUserProposedQuests");
+        const fakeReq1 = {
+            body: {type: 'requestor'},
+            headers: request.headers
+        };
+        const getPostedRequest = await gateway.prepareRequest(fakeReq1, "getUserQuest");
+        const fakeReq2 = {
+            body: {type: 'taker'},
+            headers: request.headers
+        };
+        const getTakenRequest = await gateway.prepareRequest(fakeReq2, "getUserQuest");
+
+        const resp = await gateway.parallelCall({
+            proposed: getUserProposedQuestsReq,
+            posted: getPostedRequest,
+            taken: getTakenRequest
+        });
+
+        return resp;
+    } catch (err) {
+        request.log.error(err);
+        throw {statusCode: err.status, message: err.message};
+    }
+}
 
 module.exports = {
     hello,
@@ -536,5 +576,7 @@ module.exports = {
     createQuestTakerRequest,
     updateQuestTakerRequest,
     getChatRooms,
-    createQuestConcerns
+    createQuestConcerns,
+    getAllQuests,
+    getUserProposedQuest,
 }

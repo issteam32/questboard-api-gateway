@@ -77,6 +77,7 @@ Current Available routes:
 ║      POST │ /api/create-quest                 ║
 ║      POST │ /api/create-quest-proposal        ║
 ║      POST │ /api/create-quest-user-concern    ║
+║      POST │ /api/create-quest-user-concernss  ║
 ║      POST │ /api/create-taker-request         ║
 ║      POST │ /api/create-user-skillset-profile ║
 ║      POST │ /api/delete-quest                 ║
@@ -85,10 +86,12 @@ Current Available routes:
 ║      POST │ /api/delete-taker-request         ║
 ║      POST │ /api/delete-user-skillset-profile ║
 ║      POST │ /api/evaluate-proposal            ║
+║      POST │ /api/get-all-my-quests            ║
 ║      POST │ /api/get-category-quest           ║
 ║      POST │ /api/get-list-of-skills           ║
 ║      POST │ /api/get-professional-profile     ║
 ║      POST │ /api/get-proposal                 ║
+║      POST │ /api/get-proposed-quests          ║
 ║      POST │ /api/get-quest-taker-request      ║
 ║      POST │ /api/get-single-quest             ║
 ║      POST │ /api/get-taker-request            ║
@@ -103,6 +106,7 @@ Current Available routes:
 ║      POST │ /api/update-taker-request         ║
 ║      POST │ /api/update-user-skillset-profile ║
 ╚═══════════╧═══════════════════════════════════╝
+
 ```
 
 More documents will be added later.
