@@ -346,7 +346,7 @@
             },
             {
                 "name": "requestor",
-                "type": "number",
+                "type": "string",
                 "paramType": "body",
                 "required": true
             },
@@ -412,7 +412,7 @@
             },
             {
                 "name": "requestor",
-                "type": "number",
+                "type": "string",
                 "paramType": "body",
                 "required": true
             },
@@ -460,7 +460,7 @@
             },
             {
                 "name": "awardedTo",
-                "type": "number",
+                "type": "string",
                 "paramType": "body",
                 "required": false
             },
